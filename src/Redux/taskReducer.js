@@ -1,6 +1,7 @@
 // taskReducer.js
 
 import { UNDO, REDO, ADD_TASK, REMOVE_TASK } from "./actionTypes"
+
 const initialState = {
     currentState: [],
     history: [],
