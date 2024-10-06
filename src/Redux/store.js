@@ -1,17 +1,18 @@
 // store.js
-import { applyMiddleware } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import taskReducer from './taskReducer';
 import rootSaga from './sagas';
-import { createStore } from '@reduxjs/toolkit';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(
-    taskReducer, 
-    applyMiddleware(sagaMiddleware)
-    );
+const store = configureStore({
+    reducer: taskReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
+});
 
+// run Root Saga
 sagaMiddleware.run(rootSaga);
 
 export default store;
+
